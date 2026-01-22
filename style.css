@@ -1,3 +1,42 @@
+/* Updated visual polish
+   - Added CSS variables (refined blue palette + accent)
+   - Imported modern fonts (Inter for body, Poppins for headings)
+   - Glassmorphism-lite navbar, pill-style active state, refined buttons
+   - Scroll padding to account for fixed navbar
+   - Softer card colors, rounded corners, gentle shadows
+   - Comments mark intentional changes
+*/
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap');
+
+:root{
+    /* Color system */
+    --blue-900: #0f2b50;
+    --blue-800: #14355a;
+    --blue-700: #1a365d; /* original */
+    --blue-500: #2d6fb2;
+    --accent: #ff7a59; /* single accent color, used sparingly */
+    --muted: #6b7280;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --glass: rgba(255,255,255,0.06);
+    --shadow-1: 0 6px 20px rgba(12, 20, 40, 0.08);
+    --shadow-2: 0 4px 14px rgba(12, 20, 40, 0.06);
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+
+    --nav-height: 72px;
+}
+
+/* Make sure anchor scrolling accounts for fixed navbar */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--nav-height);
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -5,26 +44,32 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     line-height: 1.6;
-    color: #333;
-    background-color: #f5f5f5;
+    color: #1f2937;
+    background-color: var(--bg);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
 }
 
-/* Navbar Styles */
+/* Navbar (glassmorphism-lite) */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #1a365d;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
     z-index: 1000;
+
+    /* subtle translucent background + blur */
+    background-color: rgba(26, 54, 93, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: var(--shadow-2);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
 .nav-container {
@@ -34,163 +79,219 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: 100%;
 }
 
+/* Logo — Poppins for confident headings */
 .nav-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
     color: #fff;
     text-decoration: none;
-    transition: color 0.3s ease;
+    letter-spacing: 0.2px;
+    transition: opacity 0.18s ease;
 }
 
-.nav-logo:hover {
-    color: #90cdf4;
-}
+.nav-logo:hover { opacity: 0.92; }
 
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 18px;
+    align-items: center;
 }
 
+/* Nav links — pill-like subtle highlight for active */
 .nav-link {
     text-decoration: none;
-    color: #e2e8f0;
-    font-weight: 500;
-    padding: 10px 20px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: rgba(226,232,240,0.95);
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: color 0.18s ease, background-color 0.22s ease, transform 0.12s ease;
+    font-size: 0.92rem;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    position: relative;
 }
 
+/* Animated underline for hover (light) */
+.nav-link::after{
+    content: '';
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: -10px;
+    height: 3px;
+    background: transparent;
+    border-radius: 3px;
+    transition: background 0.18s ease, transform 0.18s ease;
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+/* Hover state */
 .nav-link:hover {
-    background-color: #2d4a77;
     color: #fff;
 }
+.nav-link:hover::after{
+    background: linear-gradient(90deg, var(--blue-500), var(--accent));
+    transform: scaleX(1);
+}
 
-/* Hamburger Menu */
+/* Active tab — subtle pill with slight tint and accent edge */
+.nav-link.active {
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(16, 24, 40, 0.06);
+    outline: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Hamburger Menu (mobile) */
 .hamburger {
     display: none;
     cursor: pointer;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
 }
 
 .bar {
-    width: 25px;
+    width: 26px;
     height: 3px;
     background-color: #fff;
-    transition: all 0.3s ease;
+    border-radius: 3px;
+    transition: all 0.25s ease;
 }
 
-/* Hero Section */
+/* Hero Section — reduced height to account for navbar, centered content */
 .hero {
-    height: 100vh;
-    background-color: #1a365d;
+    min-height: calc(100vh - var(--nav-height));
+    background: linear-gradient(180deg, var(--blue-800), var(--blue-700));
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 0 20px;
+    padding: 40px 20px;
+    color: #fff;
 }
 
+/* Hero content styling with softer contrast and rounded container */
 .hero-content {
-    color: #fff;
-    max-width: 800px;
+    max-width: 920px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding: 48px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-1);
 }
 
 .hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-size: 2.4rem;
+    margin-bottom: 14px;
     font-weight: 700;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
+    color: #fff;
 }
 
 .hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    opacity: 0.9;
-    color: #cbd5e0;
+    font-size: 1.05rem;
+    margin-bottom: 22px;
+    opacity: 0.95;
+    color: rgba(203,213,224,0.95);
 }
 
+/* Primary CTA — confident styling */
 .cta-button {
     display: inline-block;
-    padding: 15px 40px;
-    background-color: transparent;
+    padding: 12px 28px;
+    background: linear-gradient(90deg, var(--blue-500), var(--blue-700));
     color: #fff;
     text-decoration: none;
-    font-weight: 600;
-    border: 2px solid #fff;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 999px;
+    border: none;
+    box-shadow: 0 8px 24px rgba(45,111,178,0.12);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+    font-size: 0.95rem;
+    letter-spacing: 0.6px;
 }
 
 .cta-button:hover {
-    background-color: #fff;
-    color: #1a365d;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(45,111,178,0.14);
+    opacity: 0.98;
+}
+
+.cta-button:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 18px rgba(45,111,178,0.08);
 }
 
 /* Section Styles */
 .section {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 80px 20px;
+    padding: 60px 20px;
 }
 
+/* Card-like container with softer contrast and rounded corners */
 .container {
     max-width: 1000px;
     margin: 0 auto;
     text-align: center;
-    background-color: #fff;
-    padding: 60px;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    background-color: var(--card);
+    padding: 48px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-1);
 }
 
+/* Section headings — Poppins */
 .section h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #1a365d;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-size: 1.75rem;
+    margin-bottom: 14px;
+    color: var(--blue-900);
+    font-weight: 700;
+    letter-spacing: 0.6px;
 }
 
 .section p {
-    font-size: 1.1rem;
-    color: #4a5568;
-    line-height: 1.8;
+    font-size: 1.02rem;
+    color: var(--muted);
+    line-height: 1.7;
 }
 
-/* Alternating section backgrounds */
-#leaderboard {
-    background-color: #e2e8f0;
+/* Alternating section backgrounds — softer */
+#rankings {
+    background-color: transparent;
 }
 
-#skills {
-    background-color: #cbd5e0;
+#credentials {
+    background-color: rgba(243, 246, 250, 0.6);
 }
 
-#profile {
-    background-color: #e2e8f0;
+#account {
+    background-color: transparent;
 }
 
-/* Active Navigation Link */
-.nav-link.active {
-    background-color: #2d4a77;
-    color: #fff;
+/* Active Navigation Link adjustments (underlines handled above) */
+.nav-link.active::after {
+    background: linear-gradient(90deg, var(--blue-500), var(--accent));
+    transform: scaleX(1);
+    height: 4px;
+    bottom: -12px;
 }
 
 /* Responsive Design */
+@media (max-width: 900px) {
+    .nav-menu { gap: 12px; }
+    .hero-content { padding: 36px; }
+    .hero-content h1 { font-size: 2rem; }
+}
+
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
@@ -198,13 +299,14 @@ body {
 
     .nav-menu {
         position: fixed;
-        top: 70px;
+        top: var(--nav-height);
         left: -100%;
         width: 100%;
         flex-direction: column;
-        background-color: #1a365d;
+        background-color: rgba(20, 40, 70, 0.98);
         gap: 0;
-        transition: left 0.3s ease;
+        transition: left 0.28s ease;
+        padding-bottom: 40px;
     }
 
     .nav-menu.active {
@@ -212,26 +314,22 @@ body {
     }
 
     .nav-item {
-        border-bottom: 1px solid #2d4a77;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
     }
 
     .nav-link {
         display: block;
-        padding: 20px;
+        padding: 18px;
         text-align: center;
     }
 
     .hero-content h1 {
-        font-size: 2rem;
-    }
-
-    .hero-content p {
-        font-size: 1rem;
+        font-size: 1.6rem;
     }
 
     .container {
-        padding: 40px 30px;
-        margin: 20px;
+        padding: 30px 20px;
+        margin: 16px;
     }
 }
 
@@ -250,36 +348,249 @@ body {
 
 /* Page Content Section */
 .page-content {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 100px 20px 60px;
-    background-color: #e2e8f0;
+    background-color: transparent;
 }
 
 .content-placeholder {
-    margin-top: 40px;
-    padding: 40px;
-    background-color: #f7fafc;
-    border-radius: 8px;
-    border: 2px dashed #cbd5e0;
+    margin-top: 24px;
+    padding: 32px;
+    background-color: #fbfdff;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(15, 43, 80, 0.04);
+    box-shadow: 0 6px 16px rgba(15, 43, 80, 0.04);
 }
 
 .content-placeholder p {
-    color: #718096;
-    font-style: italic;
+    color: var(--muted);
+    font-style: normal;
 }
 
-/* Responsive for page content */
-@media (max-width: 768px) {
-    .page-content {
-        padding: 90px 15px 40px;
-    }
+/* small utilities */
+.text-accent { color: var(--accent); font-weight:700; }
 
-    .content-placeholder {
-        padding: 30px 20px;
-        margin-top: 30px;
-    }
+/* Rankings table styles
+   - Added to upgrade Rankings section into a product-style leaderboard.
+   - Uses existing tokens where possible to remain visually consistent.
+   - Non-invasive: does not modify navbar underline or existing components.
+*/
+
+/* Medal colors (top 3) */
+:root{
+    --medal-gold: #FFD873;
+    --medal-silver: #C7D2FE;
+    --medal-bronze: #F0A66B;
 }
 
+/* Rank card container (matches .container but slightly denser) */
+.rank-card {
+    background-color: var(--card);
+    padding: 20px;
+    border-radius: calc(var(--radius-md));
+    box-shadow: var(--shadow-1);
+    border: 1px solid rgba(15,43,80,0.04);
+    margin-top: 20px;
+}
+
+/* Card header */
+.rank-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+.rank-card-header h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    color: var(--blue-900);
+    font-weight: 700;
+    font-family: 'Poppins', Inter, sans-serif;
+}
+
+.rank-card-header .muted {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+/* Pill group (time range) */
+.pill-group {
+    display: inline-flex;
+    gap: 8px;
+}
+
+.pill {
+    background: rgba(15,43,80,0.03);
+    border: 1px solid rgba(15,43,80,0.04);
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--blue-900);
+    cursor: pointer;
+    transition: background 0.12s ease, transform 0.12s ease;
+}
+
+.pill.active {
+    background: linear-gradient(90deg, var(--blue-500), var(--blue-700));
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(45,111,178,0.12);
+}
+
+/* Table wrapper to allow horizontal scroll on small devices */
+.rank-table-wrap {
+    overflow: auto;
+    border-radius: 10px;
+}
+
+/* Basic table layout — soft, dashboard-like */
+.rank-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 720px; /* keep columns readable on desktop; wrapper scrolls on mobile */
+}
+
+/* Header */
+.rank-table thead th {
+    text-align: left;
+    padding: 12px 16px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    background: transparent;
+    position: sticky;
+    top: 0; /* optional sticky header */
+    z-index: 2;
+}
+
+/* Column sizing */
+.rank-table thead .col-rank { width: 80px; }
+.rank-table thead .col-name { width: auto; }
+.rank-table thead .col-skill { width: 260px; }
+.rank-table thead .col-points { width: 120px; text-align: right; }
+.rank-table thead .col-trend { width: 100px; text-align: right; }
+
+/* Rows — soft separation */
+.rank-table tbody tr {
+    border-bottom: 1px solid rgba(15,43,80,0.04);
+    transition: background 0.12s ease, transform 0.12s ease;
+}
+
+/* Make rows feel like cards */
+.rank-row {
+    background: transparent;
+}
+
+/* Hover micro-interaction */
+.rank-table tbody tr:hover {
+    background: rgba(45,111,178,0.03);
+    transform: translateY(-1px);
+}
+
+/* Cells */
+.rank-table td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    color: #0f1724;
+    font-size: 0.98rem;
+}
+
+/* Rank cell / medals */
+.cell-rank { text-align: left; font-weight:700; color: var(--blue-900); }
+.medal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    font-size: 16px;
+    box-shadow: 0 6px 18px rgba(10,20,40,0.06);
+    margin-right: 8px;
+}
+
+/* Top 3 accents */
+.medal-gold { background: linear-gradient(180deg, var(--medal-gold), #f5d77a); color: #7a4f04; }
+.medal-silver { background: linear-gradient(180deg, var(--medal-silver), #e6e9ff); color: #2a2f4d; }
+.medal-bronze { background: linear-gradient(180deg, var(--medal-bronze), #f3b387); color: #4a2a06; }
+
+/* For non-top ranks */
+.rank-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(15,43,80,0.04);
+    color: var(--blue-900);
+    font-weight: 700;
+    min-width: 34px;
+    text-align: center;
+}
+
+/* Name cell */
+.cell-name a {
+    color: var(--blue-900);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.cell-name a:hover {
+    text-decoration: underline;
+    color: var(--blue-900);
+}
+
+/* Skill / title */
+.cell-skill { color: var(--muted); }
+
+/* Points — right aligned, more prominent */
+.cell-points { text-align: right; font-weight:700; color: var(--blue-900); }
+
+/* Trend indicators */
+.trend-up {
+    color: #057a46;
+    background: rgba(5,122,70,0.06);
+    padding: 6px 8px;
+    border-radius: 999px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.trend-down {
+    color: #9b1c1c;
+    background: rgba(155,28,28,0.06);
+    padding: 6px 8px;
+    border-radius: 999px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+/* Distinct row backgrounds for top rows (subtle) */
+.rank-row.top-1 td { background: linear-gradient(90deg, rgba(255,248,230,0.6), transparent); }
+.rank-row.top-2 td { background: linear-gradient(90deg, rgba(242,247,255,0.5), transparent); }
+.rank-row.top-3 td { background: linear-gradient(90deg, rgba(255,241,236,0.45), transparent); }
+
+/* Accessibility helper */
+.sr-only {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap; border: 0; padding: 0; margin: -1px;
+}
+
+/* Responsive: collapse table visually on narrow screens */
+@media (max-width: 700px) {
+    .rank-table { min-width: 0; }
+    .rank-table thead { display: none; }
+    .rank-table tbody tr { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 12px; }
+    .cell-skill, .cell-trend, .cell-points { grid-column: 1 / -1; text-align: left; }
+    .cell-points { justify-self: end; font-weight: 700; }
+    .cell-name a { font-size: 1rem; }
+}

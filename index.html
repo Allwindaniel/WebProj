@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
+    <title>Dashboard — Professional Excellence Platform</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-logo">BrandLogo</a>
+            <a href="#dashboard" class="nav-logo">BrandLogo</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#dashboard" class="nav-link">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#leaderboard" class="nav-link">Leaderboard</a>
+                    <a href="leaderboard.html" class="nav-link">Rankings</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#skills" class="nav-link">Skills & License</a>
+                    <a href="#credentials" class="nav-link">Credentials</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#profile" class="nav-link">My Profile</a>
+                    <a href="#account" class="nav-link">Account</a>
                 </li>
             </ul>
             <div class="hamburger">
@@ -34,33 +34,38 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <!-- Dashboard / Hero -->
+    <section id="dashboard" class="hero">
         <div class="hero-content">
             <h1>Professional Excellence Platform</h1>
             <p>Track achievements, showcase skills, and connect with industry leaders</p>
-            <a href="#leaderboard" class="cta-button">View Leaderboard</a>
+            <a href="#rankings" class="cta-button">Explore Rankings</a>
         </div>
     </section>
 
     <!-- Sections for navigation -->
-    <section id="leaderboard" class="section">
+    <section id="rankings" class="section">
         <div class="container">
-            <h2>Leaderboard</h2>
-            <p>See who's leading the pack!</p>
+            <h2>Rankings</h2>
+            <p>See top performers and platform rankings.</p>
+            <p class="muted">This page links to the full Rankings view. Open "Rankings" from the navbar to go to the dedicated page with the complete leaderboard.</p>
+            <div style="margin-top:16px;">
+                <a href="leaderboard.html" class="cta-button" style="padding:10px 18px; font-size:0.95rem;">Open Full Rankings</a>
+            </div>
         </div>
     </section>
 
-    <section id="skills" class="section">
+    <section id="credentials" class="section">
         <div class="container">
-            <h2>Skills & License</h2>
-            <p>Showcase your skills and earn licenses!</p>
+            <h2>Credentials</h2>
+            <p>Showcase your credentials and certifications.</p>
         </div>
     </section>
 
-    <section id="profile" class="section">
+    <section id="account" class="section">
         <div class="container">
-            <h2>My Profile</h2>
-            <p>Manage your personal profile and settings</p>
+            <h2>Account</h2>
+            <p>Manage your account and settings.</p>
         </div>
     </section>
 

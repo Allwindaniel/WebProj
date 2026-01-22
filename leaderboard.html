@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard</title>
+    <title>Rankings — Professional Excellence Platform</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,16 +13,16 @@
             <a href="index.html" class="nav-logo">BrandLogo</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html" class="nav-link">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a href="leaderboard.html" class="nav-link active">Leaderboard</a>
+                    <a href="leaderboard.html" class="nav-link active">Rankings</a>
                 </li>
                 <li class="nav-item">
-                    <a href="skills.html" class="nav-link">Skills & License</a>
+                    <a href="skills.html" class="nav-link">Credentials</a>
                 </li>
                 <li class="nav-item">
-                    <a href="profile.html" class="nav-link">My Profile</a>
+                    <a href="profile.html" class="nav-link">Account</a>
                 </li>
             </ul>
             <div class="hamburger">
@@ -36,10 +36,142 @@
     <!-- Content Section -->
     <section class="page-content">
         <div class="container">
-            <h2>Leaderboard</h2>
-            <p>View top performers and rankings in our community.</p>
-            <div class="content-placeholder">
-                <p>Leaderboard content will be displayed here.</p>
+            <h2>Rankings</h2>
+            <p>View top performers and platform rankings with verified metrics.</p>
+            <!-- Rankings card: replaced placeholder with modern, product-style rankings table.
+                 - Uses semantic table for accessibility
+                 - Top 3 rows get special classes for gold/silver/bronze accents
+                 - Rows are clickable for future profile navigation (currently placeholder link)
+                 - Minimal markup so styles can control the "dashboard" feel (not a spreadsheet)
+            -->
+            <div class="rank-card" aria-labelledby="rankings-title">
+                <div class="rank-card-header" role="toolbar" aria-label="Rankings controls">
+                    <div>
+                        <h3 id="rankings-title">Platform Rankings</h3>
+                        <p class="muted">Competitive leaderboard — updated in real-time (mock data).</p>
+                    </div>
+                    <div class="rank-controls">
+                        <!-- UI-only time range pill (no JS behavior required) -->
+                        <div class="pill-group" role="tablist" aria-label="Time range">
+                            <button class="pill active" aria-pressed="true">All time</button>
+                            <button class="pill" aria-pressed="false">This week</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accessible table structure -->
+                <div class="rank-table-wrap">
+                    <table class="rank-table" role="table" aria-describedby="rankings-title">
+                        <thead>
+                            <tr class="rank-head">
+                                <th scope="col" class="col-rank">Rank</th>
+                                <th scope="col" class="col-name">Name</th>
+                                <th scope="col" class="col-skill">Skill / Title</th>
+                                <th scope="col" class="col-points" data-sortable="true">Points</th>
+                                <th scope="col" class="col-trend">Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 visually distinguished -->
+                            <tr class="rank-row top-1" data-user="oliver-chan">
+                                <td class="cell-rank"><span class="medal medal-gold" aria-hidden="true">🥇</span><span class="sr-only">1</span></td>
+                                <td class="cell-name"><a href="profile.html?user=oliver-chan">Oliver Chan</a></td>
+                                <td class="cell-skill">Student — Semester 5</td>
+                                <td class="cell-points">12,840</td>
+                                <td class="cell-trend"><span class="trend-up">↑ 4%</span></td>
+                            </tr>
+
+                            <tr class="rank-row top-2" data-user="mariana-gomez">
+                                <td class="cell-rank"><span class="medal medal-silver" aria-hidden="true">🥈</span><span class="sr-only">2</span></td>
+                                <td class="cell-name"><a href="profile.html?user=mariana-gomez">Mariana Gomez</a></td>
+                                <td class="cell-skill">Student — Semester 4</td>
+                                <td class="cell-points">11,520</td>
+                                <td class="cell-trend"><span class="trend-up">↑ 2.1%</span></td>
+                            </tr>
+
+                            <tr class="rank-row top-3" data-user="noah-patel">
+                                <td class="cell-rank"><span class="medal medal-bronze" aria-hidden="true">🥉</span><span class="sr-only">3</span></td>
+                                <td class="cell-name"><a href="profile.html?user=noah-patel">Noah Patel</a></td>
+                                <td class="cell-skill">Student — Semester 3</td>
+                                <td class="cell-points">10,980</td>
+                                <td class="cell-trend"><span class="trend-down">↓ 0.5%</span></td>
+                            </tr>
+
+                            <!-- Regular rows -->
+                            <tr class="rank-row" data-user="aisha-khan">
+                                <td class="cell-rank"><span class="rank-badge">4</span></td>
+                                <td class="cell-name"><a href="profile.html?user=aisha-khan">Aisha Khan</a></td>
+                                <td class="cell-skill">Student — Semester 2</td>
+                                <td class="cell-points">9,340</td>
+                                <td class="cell-trend"><span class="trend-up">↑ 1.4%</span></td>
+                            </tr>
+
+                            <tr class="rank-row" data-user="li-wei">
+                                <td class="cell-rank"><span class="rank-badge">5</span></td>
+                                <td class="cell-name"><a href="profile.html?user=li-wei">Li Wei</a></td>
+                                <td class="cell-skill">Student — Semester 4</td>
+                                <td class="cell-points">8,920</td>
+                                <td class="cell-trend"><span class="trend-up">↑ 0.9%</span></td>
+                            </tr>
+
+                            <tr class="rank-row" data-user="emma-ross">
+                                <td class="cell-rank"><span class="rank-badge">6</span></td>
+                                <td class="cell-name"><a href="profile.html?user=emma-ross">Emma Ross</a></td>
+                                <td class="cell-skill">Student — Semester 3</td>
+                                <td class="cell-points">8,410</td>
+                                <td class="cell-trend"><span class="trend-down">↓ 1.0%</span></td>
+                            </tr>
+
+                            <tr class="rank-row" data-user="samuel-ford">
+                                <td class="cell-rank"><span class="rank-badge">7</span></td>
+                                <td class="cell-name"><a href="profile.html?user=samuel-ford">Samuel Ford</a></td>
+                                <td class="cell-skill">Student — Semester 5</td>
+                                <td class="cell-points">7,980</td>
+                                <td class="cell-trend"><span class="trend-up">↑ 3.2%</span></td>
+                            </tr>
+
+                            <tr class="rank-row" data-user="nora-adams">
+                                <td class="cell-rank"><span class="rank-badge">8</span></td>
+                                <td class="cell-name"><a href="profile.html?user=nora-adams">Nora Adams</a></td>
+                                <td class="cell-skill">Student — Semester 2</td>
+                                <td class="cell-points">7,120</td>
+                                <td class="cell-trend"><span class="trend-down">↓ 0.2%</span></td>
+                            </tr>
+
+                            <tr class="rank-row" data-user="diego-santos">
+                                <td class="cell-rank"><span class="rank-badge">9</span></td>
+                                <td class="cell-name"><a href="profile.html?user=diego-santos">Diego Santos</a></td>
+                                <td class="cell-skill">Student — Semester 4</td>
+                                <td class="cell-points">6,890</td>
+                                <td class="cell-trend"><span class="trend-up">↑ 1.1%</span></td>
+                            </tr>
+
+                            <tr class="rank-row" data-user="lena-moritz">
+                                <td class="cell-rank"><span class="rank-badge">10</span></td>
+                                <td class="cell-name"><a href="profile.html?user=lena-moritz">Lena Moritz</a></td>
+                                <td class="cell-skill">Student — Semester 3</td>
+                                <td class="cell-points">6,540</td>
+                                <td class="cell-trend"><span class="trend-down">↓ 0.8%</span></td>
+                            </tr>
+
+                            <tr class="rank-row" data-user="omar-ali">
+                                <td class="cell-rank"><span class="rank-badge">11</span></td>
+                                <td class="cell-name"><a href="profile.html?user=omar-ali">Omar Ali</a></td>
+                                <td class="cell-skill">Student — Semester 5</td>
+                                <td class="cell-points">6,210</td>
+                                <td class="cell-trend"><span class="trend-up">↑ 0.3%</span></td>
+                            </tr>
+
+                            <tr class="rank-row" data-user="sophia-chen">
+                                <td class="cell-rank"><span class="rank-badge">12</span></td>
+                                <td class="cell-name"><a href="profile.html?user=sophia-chen">Sophia Chen</a></td>
+                                <td class="cell-skill">Student — Semester 2</td>
+                                <td class="cell-points">5,980</td>
+                                <td class="cell-trend"><span class="trend-down">↓ 0.6%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
@@ -47,4 +179,3 @@
     <script src="main.js"></script>
 </body>
 </html>
-
