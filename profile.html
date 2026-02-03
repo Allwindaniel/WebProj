@@ -37,9 +37,57 @@
     <section class="page-content">
         <div class="container">
             <h2>Account</h2>
-            <p>Manage your account, preferences, and security settings.</p>
-            <div class="content-placeholder">
-                <p>Account details and settings will be displayed here.</p>
+            <p>Manage your profile authentication and basic details.</p>
+            
+            <div style="max-width:600px; margin:0 auto; text-align:left;">
+                
+                <!-- Profile Block -->
+                <div class="settings-section">
+                    <div class="settings-header">
+                        <h3>Profile Information</h3>
+                    </div>
+                    <div class="settings-body">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-input" value="allwin" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-input" value="student@institution.edu" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Department / Current Semester</label>
+                            <input type="text" class="form-input" value="Computer Science — Semester 5" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Block -->
+                <div class="settings-section">
+                    <div class="settings-header">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <h3>Security</h3>
+                            <span style="font-size:0.8rem; color:#057a46; font-weight:600;">Active</span>
+                        </div>
+                    </div>
+                    <div class="settings-body">
+                         <div class="form-group">
+                            <label class="form-label">Change Password</label>
+                            <input type="password" class="form-input" placeholder="Current Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-input" placeholder="New Password">
+                        </div>
+                        <div style="display:flex; justify-content:flex-end; margin-top:20px;">
+                            <button class="cta-button" style="padding:10px 20px; font-size:0.9rem;">Update Password</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align:center; margin-top:32px;">
+                    <a href="#" style="color:#d32f2f; font-size:0.9rem; font-weight:600; text-decoration:none;">Sign Out</a>
+                </div>
+
             </div>
         </div>
     </section>
